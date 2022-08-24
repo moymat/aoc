@@ -33,16 +33,14 @@ func whichIsMoreCommon(inputs *[]string, idx int) MostCommon {
 	return Equal
 }
 
-func updateLines(lines *[]string, linesCopy *[]string, compare rune, idx int) {
+func updateLines(lines *[]string, compare rune, idx int) {
+	var newLines []string
 	for i, line := range *lines {
-		if line[idx] == byte(compare) {
-			if i < len(*linesCopy)-1 {
-				*linesCopy = append((*linesCopy)[:i], (*linesCopy)[i+1:]...)
-			} else {
-				*linesCopy = (*linesCopy)[:i]
-			}
+		if line[idx] != byte(compare) {
+			newLines = append(newLines, (*lines)[i])
 		}
 	}
+	*lines = newLines
 }
 
 func getRates(file string) (int64, int64) {
@@ -82,10 +80,10 @@ func getRates(file string) (int64, int64) {
 			break
 		}
 
-		if whichIsMoreCommon(&lines, idx) != Zero {
-			updateLines(&lines, &oxygenLines, '0', idx)
+		if whichIsMoreCommon(&oxygenLines, idx) != Zero {
+			updateLines(&oxygenLines, '0', idx)
 		} else {
-			updateLines(&lines, &oxygenLines, '1', idx)
+			updateLines(&oxygenLines, '1', idx)
 		}
 
 	}
@@ -98,10 +96,10 @@ func getRates(file string) (int64, int64) {
 			break
 		}
 
-		if whichIsMoreCommon(&lines, idx) == Zero {
-			updateLines(&lines, &co2Lines, '0', idx)
+		if whichIsMoreCommon(&co2Lines, idx) == Zero {
+			updateLines(&co2Lines, '0', idx)
 		} else {
-			updateLines(&lines, &co2Lines, '1', idx)
+			updateLines(&co2Lines, '1', idx)
 		}
 	}
 	co2Number, err := strconv.ParseInt(co2Lines[0], 2, 64)
