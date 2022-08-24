@@ -7,5 +7,7 @@ export function getInput() {
 
   console.log("Running day " + day + " with " + file + " inputs");
 
-  return fs.readFileSync(`../inputs/d${day}/${file}.txt`).toString();
+  return fs
+    .readFileSync(`${__dirname.replace("ts", "inputs")}/d${day}/${file}.txt`)
+    .toString();
 }

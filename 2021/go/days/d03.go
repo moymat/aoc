@@ -8,15 +8,15 @@ import (
 	h "github.com/moymat/aoc2021/helpers"
 )
 
-type MoreCommon int
+type MostCommon int
 
 const (
-	Zero MoreCommon = iota
+	Zero MostCommon = iota
 	One
 	Equal
 )
 
-func whichIsMoreCommon(inputs *[]string, idx int) MoreCommon {
+func whichIsMoreCommon(inputs *[]string, idx int) MostCommon {
 	ones := 0
 	for _, input := range *inputs {
 		if input[idx] == '1' {

@@ -1,12 +1,22 @@
 import { getInput } from "./helpers";
 
-function whichIsMostCommon(inputs: string[], idx: number) {
+enum MostCommon {
+  Zero,
+  One,
+  Equal,
+}
+
+function whichIsMostCommon(inputs: string[], idx: number): MostCommon {
   const ones = inputs.reduce(
     (sum, line) => (line[idx] === "1" ? sum + 1 : sum),
     0
   );
   const zeros = inputs.length - ones;
-  return ones > zeros ? "1" : ones < zeros ? "0" : "equal";
+  return ones > zeros
+    ? MostCommon.One
+    : ones < zeros
+    ? MostCommon.Zero
+    : MostCommon.Equal;
 }
 
 function getRates() {
@@ -14,7 +24,9 @@ function getRates() {
   const firstLineArr = lines[0].split("");
 
   const gammaRate = firstLineArr
-    .map((_, i) => (whichIsMostCommon(lines, i) !== "0" ? "1" : "0"))
+    .map((_, i) =>
+      whichIsMostCommon(lines, i) !== MostCommon.Zero ? "1" : "0"
+    )
     .join("");
   const epsilonRate = gammaRate
     .split("")
@@ -25,7 +37,7 @@ function getRates() {
     (list, _, i) =>
       list.length === 1
         ? list
-        : whichIsMostCommon(list, i) !== "0"
+        : whichIsMostCommon(list, i) !== MostCommon.Zero
         ? list.filter((line) => line[i] === "1")
         : list.filter((line) => line[i] === "0"),
     [...lines]
@@ -35,7 +47,7 @@ function getRates() {
     (list, _, i) =>
       list.length === 1
         ? list
-        : whichIsMostCommon(list, i) === "0"
+        : whichIsMostCommon(list, i) === MostCommon.Zero
         ? list.filter((line) => line[i] === "1")
         : list.filter((line) => line[i] === "0"),
     [...lines]
