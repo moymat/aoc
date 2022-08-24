@@ -30,6 +30,8 @@ func main() {
 		d.RunD02(file)
 	} else if day == 3 {
 		d.RunD03(file)
+	} else if day == 4 {
+		d.RunD04(file)
 	} else {
 		panic("wrong day")
 	}

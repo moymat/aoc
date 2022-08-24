@@ -18,3 +18,12 @@ func GetInput(day string, file string) string {
 	CheckError(err)
 	return string(inputs)
 }
+
+func IntSliceContains(slice *[]int, value int) bool {
+	for _, val := range *slice {
+		if val == value {
+			return true
+		}
+	}
+	return false
+}
