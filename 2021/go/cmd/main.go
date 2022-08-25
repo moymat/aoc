@@ -5,8 +5,8 @@ import (
 	"os"
 	"strconv"
 
-	d "github.com/moymat/aoc2021/days"
-	h "github.com/moymat/aoc2021/helpers"
+	"github.com/moymat/aoc2021/pkg/days"
+	"github.com/moymat/aoc2021/pkg/helpers"
 )
 
 func main() {
@@ -15,7 +15,7 @@ func main() {
 	}
 
 	day, err := strconv.Atoi(os.Args[1])
-	h.CheckError(err)
+	helpers.CheckError(err)
 
 	file := "main"
 	if len(os.Args) > 2 && os.Args[2] == "test" {
@@ -25,13 +25,15 @@ func main() {
 	fmt.Println("Running day " + os.Args[1] + " with " + file + " inputs")
 
 	if day == 1 {
-		d.RunD01(file)
+		days.RunD01(file)
 	} else if day == 2 {
-		d.RunD02(file)
+		days.RunD02(file)
 	} else if day == 3 {
-		d.RunD03(file)
+		days.RunD03(file)
 	} else if day == 4 {
-		d.RunD04(file)
+		days.RunD04(file)
+	} else if day == 5 {
+		days.RunD05(file)
 	} else {
 		panic("wrong day")
 	}

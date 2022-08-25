@@ -27,3 +27,16 @@ func IntSliceContains(slice *[]int, value int) bool {
 	}
 	return false
 }
+
+func MinMax(num1 int, num2 int) (int, int) {
+	min := 0
+	max := 0
+	if num1 > num2 {
+		min = num2
+		max = num1
+	} else {
+		min = num1
+		max = num2
+	}
+	return min, max
+}

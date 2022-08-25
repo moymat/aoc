@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	h "github.com/moymat/aoc2021/helpers"
+	"github.com/moymat/aoc2021/pkg/helpers"
 )
 
 type MostCommon int
@@ -44,7 +44,7 @@ func updateLines(lines *[]string, compare rune, idx int) {
 }
 
 func getRates(file string) (int64, int64) {
-	lines := strings.Split(h.GetInput("d03", file), "\n")
+	lines := strings.Split(helpers.GetInput("d03", file), "\n")
 	for i, line := range lines {
 		lines[i] = strings.TrimSpace(line)
 	}
@@ -69,10 +69,10 @@ func getRates(file string) (int64, int64) {
 	}
 
 	gammaNumber, err := strconv.ParseInt(gammaRates, 2, 64)
-	h.CheckError(err)
+	helpers.CheckError(err)
 
 	epsilonNumber, err := strconv.ParseInt(epsilonRates, 2, 64)
-	h.CheckError(err)
+	helpers.CheckError(err)
 
 	oxygenLines := append([]string{}, lines...)
 	for idx := range firstLine {
@@ -88,7 +88,7 @@ func getRates(file string) (int64, int64) {
 
 	}
 	oxygenNumber, err := strconv.ParseInt(oxygenLines[0], 2, 64)
-	h.CheckError(err)
+	helpers.CheckError(err)
 
 	co2Lines := append([]string{}, lines...)
 	for idx := range firstLine {
@@ -103,7 +103,7 @@ func getRates(file string) (int64, int64) {
 		}
 	}
 	co2Number, err := strconv.ParseInt(co2Lines[0], 2, 64)
-	h.CheckError(err)
+	helpers.CheckError(err)
 
 	fmt.Println(oxygenNumber, co2Number)
 

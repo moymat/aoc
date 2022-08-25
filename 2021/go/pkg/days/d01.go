@@ -5,11 +5,11 @@ import (
 	"strconv"
 	"strings"
 
-	h "github.com/moymat/aoc2021/helpers"
+	"github.com/moymat/aoc2021/pkg/helpers"
 )
 
 func computeNbOfIncrease(file string) int {
-	lines := strings.Split(h.GetInput("d01", file), "\n")
+	lines := strings.Split(helpers.GetInput("d01", file), "\n")
 	total := 0
 
 	for idx := range lines {

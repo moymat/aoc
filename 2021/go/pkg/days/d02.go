@@ -4,7 +4,7 @@ import (
 	"strconv"
 	"strings"
 
-	h "github.com/moymat/aoc2021/helpers"
+	"github.com/moymat/aoc2021/pkg/helpers"
 )
 
 type Position struct {
@@ -17,7 +17,7 @@ func getMoveInput(input string, aim int) Position {
 	parts := strings.Split(input, " ")
 
 	amount, err := strconv.Atoi(parts[1])
-	h.CheckError(err)
+	helpers.CheckError(err)
 
 	if parts[0] == "forward" {
 		return Position{x: amount, y: amount * aim, aim: aim}
@@ -30,7 +30,7 @@ func getMoveInput(input string, aim int) Position {
 
 func getPosition(file string) int {
 	finalPosition := Position{0, 0, 0}
-	for _, line := range strings.Split(h.GetInput("d02", file), "\n") {
+	for _, line := range strings.Split(helpers.GetInput("d02", file), "\n") {
 		position := getMoveInput(strings.TrimSpace(line), finalPosition.aim)
 		finalPosition.x += position.x
 		finalPosition.y += position.y

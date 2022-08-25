@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	h "github.com/moymat/aoc2021/helpers"
+	"github.com/moymat/aoc2021/pkg/helpers"
 )
 
 type Cell struct {
@@ -63,7 +63,7 @@ func computeTotalPoints(board *Board) int {
 		for _, cell := range row {
 			if !cell.marked {
 				val, err := strconv.Atoi(cell.value)
-				h.CheckError(err)
+				helpers.CheckError(err)
 				total += val
 			}
 		}
@@ -94,14 +94,14 @@ func playRound(draw string, boards *[]Board) int {
 
 func playRoundToLose(draw string, boards *[]Board, winnerBoardsIdx *[]int) (int, int) {
 	for i, board := range *boards {
-		if !h.IntSliceContains(winnerBoardsIdx, i) {
+		if !helpers.IntSliceContains(winnerBoardsIdx, i) {
 			markNumber(draw, &board)
 			res := hasWon(&board)
 			if res {
 				*winnerBoardsIdx = append(*winnerBoardsIdx, i)
 				if len(*winnerBoardsIdx) == len(*boards) {
 					drawNum, err := strconv.Atoi(draw)
-					h.CheckError(err)
+					helpers.CheckError(err)
 					return computeTotalPoints(&board), drawNum
 				}
 			}
@@ -111,7 +111,7 @@ func playRoundToLose(draw string, boards *[]Board, winnerBoardsIdx *[]int) (int,
 }
 
 func RunD04(file string) {
-	inputs := strings.Split(h.GetInput("d04", file), "\n\n")
+	inputs := strings.Split(helpers.GetInput("d04", file), "\n\n")
 
 	var draws []string
 	for _, number := range strings.Split(inputs[0], ",") {
@@ -130,7 +130,7 @@ func RunD04(file string) {
 		if total >= 0 {
 			totalPoints = total
 			drawNum, err := strconv.Atoi(draw)
-			h.CheckError(err)
+			helpers.CheckError(err)
 			winnerDraw = drawNum
 			break
 		}
