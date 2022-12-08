@@ -1,1 +1,5 @@
 code.txt
+
+*/rust/target
+*/rust/debug
+*/rust/Cargo.lock
